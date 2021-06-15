@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RocketLunchRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllByEmailAndPassword(String email, String password);
-    List<User> findAllByPassword(String email);
 }
