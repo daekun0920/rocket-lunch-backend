@@ -1,8 +1,10 @@
 package com.project.rocketlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -18,7 +20,10 @@ public class Post {
     @Column(nullable = false)
     private String food;
 
+    @Column(nullable = false)
+    private String time;
+
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "FK_USER"))
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 }

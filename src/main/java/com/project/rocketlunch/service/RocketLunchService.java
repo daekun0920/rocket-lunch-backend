@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -45,11 +46,16 @@ public class RocketLunchService {
 
 
     public void addPost(Post post) {
+
         postRepository.save(post);
     }
 
     public List<Post> getPosts(Post post) {
-        return postRepository.findAllByOrderByIdDesc();
+
+        return postRepository.findAllByOrderByIdDesc().stream().map(obj -> {
+            obj.getUser().setPassword("");
+            return obj;
+        }).collect((Collectors.toList()));
     }
 
     /**

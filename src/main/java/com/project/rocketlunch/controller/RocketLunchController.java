@@ -1,5 +1,6 @@
 package com.project.rocketlunch.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.project.rocketlunch.model.Post;
 import com.project.rocketlunch.model.User;
