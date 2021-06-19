@@ -2,6 +2,7 @@ package com.project.rocketlunch.service;
 
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
+import com.project.rocketlunch.model.ChatRoom;
 import com.project.rocketlunch.model.Post;
 import com.project.rocketlunch.model.User;
 import com.project.rocketlunch.repository.PostRepository;
@@ -106,5 +107,11 @@ public class RocketLunchService {
                 .toString();
     }
 
+    /**
+     * Make Chat Room
+     * @param chatRoom
+     */
+    public void makeRoom(ChatRoom chatRoom) {
 
+    }
 }

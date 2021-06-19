@@ -1,5 +1,6 @@
 package com.project.rocketlunch.controller;
 
+import com.project.rocketlunch.model.ChatRoom;
 import com.project.rocketlunch.model.Post;
 import com.project.rocketlunch.model.User;
 import com.project.rocketlunch.service.RocketLunchService;
@@ -91,6 +92,16 @@ public class RocketLunchController {
             System.out.println(user.getPassword());
 
             rocketLunchService.userUpdate(user);
+            return ResponseEntity.ok().body("Success!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+
+    @PostMapping(path = "/make-room")
+    public ResponseEntity makeRoom(@RequestBody ChatRoom chatRoom) {
+        try {
+            rocketLunchService.makeRoom(chatRoom);
             return ResponseEntity.ok().body("Success!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
