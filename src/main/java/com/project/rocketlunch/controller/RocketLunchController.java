@@ -1,20 +1,14 @@
 package com.project.rocketlunch.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.project.rocketlunch.model.Post;
 import com.project.rocketlunch.model.User;
 import com.project.rocketlunch.service.RocketLunchService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/rocket-lunch")
@@ -34,7 +28,6 @@ public class RocketLunchController {
         try {
             System.out.println(user.getEmail() + " : " + user.getPassword());
             if (rocketLunchService.signIn(user)) {
-
                 return ResponseEntity.ok().body(user);
             } else {
                 throw new Exception("Found more than 1 user.");
@@ -76,15 +69,31 @@ public class RocketLunchController {
         }
     }
 
+    /**
+     * Get Posts
+     * @param city
+     * @return
+     */
     @GetMapping(path = "/posts")
-    public ResponseEntity getPosts(Post post) {
+    public ResponseEntity getPosts(@RequestParam(required = false) String city) {
         try {
-            List<Post> list = rocketLunchService.getPosts(post);
+            List<Post> list = rocketLunchService.getPosts(city);
             return ResponseEntity.ok().body(list);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e);
         }
-
     }
 
+    @PostMapping(path = "/user-update")
+    public ResponseEntity userUpdate(@RequestBody User user) {
+        try {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
+
+            rocketLunchService.userUpdate(user);
+            return ResponseEntity.ok().body("Success!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
 }
