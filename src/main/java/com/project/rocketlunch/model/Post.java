@@ -23,7 +23,10 @@ public class Post {
     @Column(nullable = false)
     private String time;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = true)
+    private boolean delFlag;
+
+    @ManyToOne()
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 }

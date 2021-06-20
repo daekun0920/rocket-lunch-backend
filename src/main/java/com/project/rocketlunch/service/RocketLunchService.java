@@ -5,6 +5,7 @@ import com.google.common.hash.Hashing;
 import com.project.rocketlunch.model.ChatRoom;
 import com.project.rocketlunch.model.Post;
 import com.project.rocketlunch.model.User;
+import com.project.rocketlunch.repository.ChatRoomRepository;
 import com.project.rocketlunch.repository.PostRepository;
 import com.project.rocketlunch.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class RocketLunchService {
     private UserRepository userRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private ChatRoomRepository chatRoomRepository;
 
     /**
      * Sign Up Service
@@ -72,9 +75,9 @@ public class RocketLunchService {
     public List<Post> getPosts(String city) {
         // if City parameter is presented(When searched by an user)
         if (!Strings.isNullOrEmpty(city)) {
-            return postRepository.findAllByCityOrderByIdDesc(city);
+            return postRepository.getAllPostsByCity(city);
         } else {
-            return postRepository.findAllByOrderByIdDesc();
+            return postRepository.getAllPosts();
         }
     }
 
@@ -97,6 +100,14 @@ public class RocketLunchService {
     }
 
     /**
+     * Make Chat Room
+     * @param chatRoom
+     */
+    public void makeRoom(ChatRoom chatRoom) {
+        chatRoomRepository.saveAndFlush(chatRoom);
+    }
+
+    /**
      * Password Hashing Method
      * @param password
      * @return
@@ -107,11 +118,5 @@ public class RocketLunchService {
                 .toString();
     }
 
-    /**
-     * Make Chat Room
-     * @param chatRoom
-     */
-    public void makeRoom(ChatRoom chatRoom) {
 
-    }
 }

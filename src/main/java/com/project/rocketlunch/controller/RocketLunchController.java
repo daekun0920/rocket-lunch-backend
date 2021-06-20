@@ -98,9 +98,10 @@ public class RocketLunchController {
         }
     }
 
-    @PostMapping(path = "/make-room")
+    @PostMapping(path = "/join")
     public ResponseEntity makeRoom(@RequestBody ChatRoom chatRoom) {
         try {
+
             rocketLunchService.makeRoom(chatRoom);
             return ResponseEntity.ok().body("Success!");
         } catch (Exception e) {

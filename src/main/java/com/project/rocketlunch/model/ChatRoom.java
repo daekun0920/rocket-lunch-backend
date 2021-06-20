@@ -20,6 +20,10 @@ public class ChatRoom {
     @JoinColumn(name="receiver_id", nullable = false)
     private User receiver;
 
+    @OneToOne
+    @JoinColumn(name="post_id", nullable = false)
+    private Post post;
+
     @Column(nullable = true)
     private String message;
 
