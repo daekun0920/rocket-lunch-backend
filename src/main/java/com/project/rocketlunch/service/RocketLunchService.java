@@ -9,14 +9,12 @@ import com.project.rocketlunch.repository.ChatRoomRepository;
 import com.project.rocketlunch.repository.PostRepository;
 import com.project.rocketlunch.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -119,4 +117,7 @@ public class RocketLunchService {
     }
 
 
+    public List<ChatRoom> getRooms(Integer id) {
+        return chatRoomRepository.getRooms(id);
+    }
 }

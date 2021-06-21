@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      * Find All Posts
      * @return
      */
-    @Query(value="SELECT a.id, a.food, a.time, a.city, a.user_id, a.del_flag, b.username FROM POST a INNER JOIN USER b ON a.user_id = b.id", nativeQuery = true)
+    @Query(value="SELECT a.id, a.food, a.time, a.city, a.user_id, a.del_flag, b.username FROM POST a INNER JOIN USER b ON a.user_id = b.id ORDER BY a.id DESC", nativeQuery = true)
     List<Post> getAllPosts();
 
     /**

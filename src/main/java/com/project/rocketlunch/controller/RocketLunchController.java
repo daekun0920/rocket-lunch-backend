@@ -18,6 +18,40 @@ public class RocketLunchController {
 
     @Autowired
     RocketLunchService rocketLunchService;
+    /**
+     * Get Mapping
+     */
+
+    /**
+     * Get Posts
+     * @param city
+     * @return
+     */
+    @GetMapping(path = "/posts")
+    public ResponseEntity getPosts(@RequestParam(required = false) String city) {
+        try {
+            List<Post> list = rocketLunchService.getPosts(city);
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+
+    @GetMapping(path = "/rooms")
+    public ResponseEntity getRooms(@RequestParam(required = false) Integer id) {
+        try {
+            List<ChatRoom> list = rocketLunchService.getRooms(id);
+            System.out.println(list.get(0).getPost().getUser().getUsername());
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+    }
+
+
+    /**
+     * Post Mapping
+     */
 
     /**
      * User Sign In
@@ -70,20 +104,7 @@ public class RocketLunchController {
         }
     }
 
-    /**
-     * Get Posts
-     * @param city
-     * @return
-     */
-    @GetMapping(path = "/posts")
-    public ResponseEntity getPosts(@RequestParam(required = false) String city) {
-        try {
-            List<Post> list = rocketLunchService.getPosts(city);
-            return ResponseEntity.ok().body(list);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e);
-        }
-    }
+
 
     @PostMapping(path = "/user-update")
     public ResponseEntity userUpdate(@RequestBody User user) {
